@@ -1,0 +1,42 @@
+# https://learn.unity.com/tutorial/project-architecture-unity-project-folder-structure#5c7f8528edbc2a002053b672
+
+#################
+# Unity generated
+#################
+Temp/
+Library/
+Logs/
+UserSettings/
+#################
+# User generated
+#################
+Build/
+release/
+
+#######################################
+# Visual Studio / MonoDevelop generated
+#######################################
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
+*.vsconfig
+.vs/
+
+##############
+# OS generated
+##############
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
