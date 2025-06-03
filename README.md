@@ -1,5 +1,5 @@
 Maximilian Bauer, Viktor Bublinskyy, Jakob Fenzl, Dominik Sandler
-# Lastenheft Project Ripoff
+# Project Ripoff
 
 ## Einleitung
 Project Ripoff ist ein [Singleplayer](#Singleplayer) [CQB](#CQB) Taktik Shooter, bei dem der Spieler in die Rolle eines [Squad Leaders](#SquadLeader) springt und mit einem KI-Team Gebäude bzw. Bereiche sichern muss.
