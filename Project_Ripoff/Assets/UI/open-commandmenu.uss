@@ -1,0 +1,6 @@
+#button_opencommandmenu{
+    width:20%;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
