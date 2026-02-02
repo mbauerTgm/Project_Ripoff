@@ -1,0 +1,102 @@
+.unity-tab__header {
+    font-size: 25px;
+    -unity-font-style: bold;
+    background-color: transparent;
+    border-top-color: rgb(252, 252, 252);
+    border-right-color: rgb(252, 252, 252);
+    border-bottom-color: rgb(252, 252, 252);
+    border-left-color: rgb(252, 252, 252);
+    width: 160px;
+    height: 50px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    color: rgb(252, 252, 252);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-right: 20px;
+    justify-content: center;
+    padding: 0;
+    transition-property: color, border-top-color, border-right-color, border-bottom-color, border-left-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.unity-tab-view__header-container {
+    flex-direction: row;
+}
+
+.unity-tab__header:checked {
+    color: rgb(0, 220, 255);
+    border-top-color: rgb(0, 220, 255);
+    border-right-color: rgb(0, 220, 255);
+    border-bottom-color: rgb(0, 220, 255);
+    border-left-color: rgb(0, 220, 255);
+}
+
+.unity-tab__header-underline {
+    opacity: 0;
+}
+.unity-tab__header {
+    margin-bottom:20px;
+}
+.unity-base-popup-field__input, .unity-base-slider__input {
+    max-width:160px;
+    align-self: flex-end;
+    margin-left: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -unity-font-style: bold;
+    background-color: transparent;
+    color: rgb(252, 252, 252);
+    border-top-color: rgb(252, 252, 252);
+    border-right-color: rgb(252, 252, 252);
+    border-bottom-color: rgb(252, 252, 252);
+    border-left-color: rgb(252, 252, 252);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+.unity-toggle__input {
+    justify-content: flex-end;
+    overflow:visible;
+}
+
+.unity-toggle__checkmark {
+    border-radius:5px;
+}
+.unity-base-popup-field__arrow {
+    -unity-background-image-tint-color: rgb(252, 252, 252);
+}
+
+.my-slider .unity-base-field__input {
+    border-width: 0;
+    border-color: transparent;
+    -unity-focus-outline-color: transparent;
+}
+
+
+.unity-base-slider__dragger {
+    border-radius: 200px;
+    width: 20px;
+    height: 20px;
+}
+
+#unity-drag-container {
+    margin-left: -20px;
+}
+
+#unity-tracker {
+    border-radius: 5px;
+}
+
+#unity-fill {
+    border-radius: 5px;
+}

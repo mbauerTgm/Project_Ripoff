@@ -4,5 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Test_Gamelogik/Test_FOV.unity
+    guid: 44d0def84c9666644a280b6c4f2586df
+  - enabled: 1
+    path: Assets/UI/UI.unity
+    guid: e45562a4c841cbd4bbbdfffb6ac864f7
+  - enabled: 0
+    path: Assets/Scenes/Prototyp.unity
+    guid: 7bb6538d4fad7fd4bb010b3469904e6e
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
