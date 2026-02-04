@@ -79,9 +79,12 @@
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\SetPatrolPoint.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Variables\TeammateFormationTypeVariable.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\DetectEnemyService.cs" />
+    <Compile Include="Assets\Scripts\Long_Distance_Interaction\LaserCollisionHandler.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\CheckTeammateFormationMode.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Formationmanager.cs" />
+    <Compile Include="Assets\Scripts\Objective\ObjectiveInteractable.cs" />
     <Compile Include="Assets\Scripts\Player_Character\Player_Character.cs" />
+    <Compile Include="Assets\Scripts\Long_Distance_Interaction\Laser_Shooter.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Scripts\PlayerNavmeshController.cs" />
     <Compile Include="Assets\UI\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />

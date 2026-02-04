@@ -15,7 +15,14 @@ using UnityEngine;
 public class Messaging_Service : MonoBehaviour
 {
     //----------------------
-    //player movement
+    // Game
+    //----------------------
+
+    //Sollte der Spieler in einem Level sterben
+    public Action GameOver;
+
+    //----------------------
+    //player Interaction
     //----------------------
 
     //Wenn der Spieler, mittels Rechtsklick, eine neue Position für den Charakter bestimmt hat
@@ -26,6 +33,24 @@ public class Messaging_Service : MonoBehaviour
 
     //Wenn der Spieler mittels Shift die Queue visualisieren will
     public Action<bool> showPlayerQueue;
+
+    //Wenn der Spieler mittels Linksklick einen "Feuerbefehl" für den Playercharacter gibt
+    public Action fireLaserShotPlayer;
+
+    //Mit diesem Event kann entkoppelt, die Position des PlayerCharacters bestimmt werden
+    public Func<Vector3> getPlayerPosition;
+
+    //Wenn der Spieler mit der Maus über das Objective hovert und den capture Button drückt ("F")
+    public Action interactObjectiveButtonDepress;
+
+    //Wenn der Spieler mit der Maus über das Objective hovert und den capture Button los lässt ("F")
+    public Action interactObjectiveButtonRelease;
+
+    //Wenn der Spieler über ein Objective Hovert
+    public Action<ObjectiveInteractable> processInteractionEvent;
+
+    //Wenn der Spieler aufhört über ein Objective Hovern
+    public Action<ObjectiveInteractable> resetProgressEvent;
 
     //----------------------
     //camera
@@ -92,6 +117,9 @@ public class Messaging_Service : MonoBehaviour
 
     //Wenn der Spieler eine Position für das MoveTo auswählt soll der Cursor geändert werden
     public Action<bool> selectTeamMovePosition;
+
+    //Wenn der Spieler über ein Objective Hovert und dies angezeigt werden soll.
+    public Action<Vector3> visualizeObjectiveHoverAt;
 
     //----------------------
     //SFX

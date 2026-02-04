@@ -26,7 +26,7 @@ public class SFX_Service : MonoBehaviour
 
     private void Awake()
     {
-        messaging_Service = FindObjectOfType<Messaging_Service>();
+        messaging_Service = FindFirstObjectByType<Messaging_Service>();
     }
 
     private void OnEnable()

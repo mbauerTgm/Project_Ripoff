@@ -84,6 +84,7 @@ public class MainMenuController : MonoBehaviour
         if (messaging_Service != null)
         {
             messaging_Service.toggleSettings += toggleSettings;
+            messaging_Service.GameOver += loadMainMenuScene;
         }
         RegisterUISounds();
     }
@@ -95,6 +96,7 @@ public class MainMenuController : MonoBehaviour
         if (messaging_Service != null)
         {
             messaging_Service.toggleSettings -= toggleSettings;
+            messaging_Service.GameOver += loadMainMenuScene;
         }
     }
 
@@ -345,5 +347,10 @@ public class MainMenuController : MonoBehaviour
                 SceneManager.LoadScene("UI");
             }
         }
+    }
+
+    private void loadMainMenuScene()
+    {
+        SceneManager.LoadScene("UI");
     }
 }

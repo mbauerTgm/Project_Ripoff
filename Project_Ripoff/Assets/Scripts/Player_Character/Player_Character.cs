@@ -27,6 +27,7 @@ public class Player_Character : MonoBehaviour
         messaging_Service.playerMoveEvent += MovePlayer;
         messaging_Service.playerMoveShiftEvent += AddMovePointToQueue;
         messaging_Service.showPlayerQueue += SetShowQueue;
+        messaging_Service.getPlayerPosition += GetPlayerPosition;
     }
 
     private void OnDisable()
@@ -34,6 +35,7 @@ public class Player_Character : MonoBehaviour
         messaging_Service.playerMoveEvent -= MovePlayer;
         messaging_Service.playerMoveShiftEvent -= AddMovePointToQueue;
         messaging_Service.showPlayerQueue -= SetShowQueue;
+        messaging_Service.getPlayerPosition -= GetPlayerPosition;
     }
 
     // Start is called before the first frame update
@@ -149,5 +151,26 @@ public class Player_Character : MonoBehaviour
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision == null) return;
+
+        if (collision.gameObject.CompareTag("LaserShot"))
+        {
+            messaging_Service.playSFXEvent?.Invoke("CharacterImpact", transform.position);
+            Debug.Log("Bitte hier VFX hinzufügen @Viktor! LG & Danke");
+            PlayerDying();
+        }
+    }
+
+    public void PlayerDying()
+    {
+        // Dying Animation
+        messaging_Service.playSFXEvent("PlayerDying", transform.position);
+
+    }
+
+    public Vector3 GetPlayerPosition() {  return transform.position; }
 
 }

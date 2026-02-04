@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
  * und weist alle anderen Services mittels auslösen von Events
  * zu auf Eingaben folgende Aktionen an.
  * @author Maximilian Bauer
- * @version 1.0.4
+ * @version 1.0.5
  */
 public class Input_Manager : MonoBehaviour
 {
@@ -19,16 +19,31 @@ public class Input_Manager : MonoBehaviour
     private Camera mainCamera;
     private VisualElement root;
     private VisualElement rootOpen;
-    public GameObject openCommandMenuUI;
     private bool wasdWasPressed = false;
     private bool isMiddleMouseHeld = false;
     private bool selectTeamMovePosition = false;
     private bool wasSelectTeamMovePosition = false;
+    
+    private LayerMask floorLayer;
+
+    [Header("Combat Settings")]
+    [SerializeField] private float playerFireRate = 0.45f; // Zeit in Sekunden zwischen Schüssen
+    private float nextFireTime = 0f;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private LayerMask objectiveInteractionLayer;
+    private ObjectiveInteractable currentHoveredObjective;
+    private Collider lastHitCollider;
+    private bool interactionButtonPressed = false;
+
+    [Header("UI")]
     [SerializeField] private bool sceneWithUI = true;
+    public GameObject openCommandMenuUI;
 
     private void Awake()
     {
         messaging_Service = FindFirstObjectByType<Messaging_Service>();
+        floorLayer = LayerMask.GetMask("Floor");
     }
 
     private void OnEnable()
@@ -93,6 +108,26 @@ public class Input_Manager : MonoBehaviour
                 messaging_Service.showPlayerQueue?.Invoke(false);
             }
         }
+
+        //----------------------
+        //player interaction
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) {
+            nextFireTime = Time.time + playerFireRate;
+
+            messaging_Service.fireLaserShotPlayer?.Invoke(); 
+        }
+
+        //----------------------
+        // Objective Interaction
+        if (Input.GetKeyDown(KeyCode.F)) { 
+            interactionButtonPressed = true; 
+            messaging_Service.interactObjectiveButtonDepress?.Invoke();
+        }
+        if (Input.GetKeyUp(KeyCode.F)) { 
+            interactionButtonPressed = false; 
+            messaging_Service.interactObjectiveButtonRelease?.Invoke();
+        }
+        HandleInteractionLogic();
 
         //----------------------
         //camera
@@ -188,7 +223,7 @@ public class Input_Manager : MonoBehaviour
         // Ray von der Kamera zur Mausposition
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000f, floorLayer))
         {
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f); // Debug Linie sichtbar im Scene View
             return hitInfo.point;
@@ -198,6 +233,44 @@ public class Input_Manager : MonoBehaviour
             return gameObject.transform.position;
         }
         
+    }
+
+    private void HandleInteractionLogic()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1000f, objectiveInteractionLayer))
+        {
+            if (hit.collider != lastHitCollider || lastHitCollider == null)
+            {
+                currentHoveredObjective = hit.collider.GetComponent<ObjectiveInteractable>();
+                lastHitCollider = hit.collider;
+            }
+
+            if(currentHoveredObjective != null) { 
+                // Distanz-Check
+                Vector3 currentPlayerPosition = (Vector3) messaging_Service.getPlayerPosition?.Invoke();
+
+                float distance = Vector3.Distance(currentHoveredObjective.transform.position, currentPlayerPosition);
+                if (distance > currentHoveredObjective.requiredDistance)
+                {
+                    messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective); // Zu weit weg -> Abbruch
+                    return;
+                }
+                messaging_Service.processInteractionEvent?.Invoke(currentHoveredObjective);
+            }
+        }
+        else
+        {
+            //Nothing hit
+            if (currentHoveredObjective != null)
+            {
+                messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective);
+                currentHoveredObjective = null;
+            }
+            lastHitCollider = null;
+        }
     }
 
     private void HandleCommanderAction(string action)

@@ -7,6 +7,11 @@ TagManager:
   - Teammate
   - MapCenter
   - FogCamera
+  - Wall
+  - Floor
+  - Door
+  - LaserShot
+  - Objective
   layers:
   - Default
   - TransparentFX
@@ -20,8 +25,8 @@ TagManager:
   - obstacleMask
   - Fog_Enemy
   - Door
-  - 
-  - 
+  - Floor
+  - Objective
   - 
   - 
   - 
