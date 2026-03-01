@@ -1,0 +1,24 @@
+.custom-progress-bar {
+    height: 30px; 
+    margin-top: 10px;
+}
+
+.custom-progress-bar .unity-progress-bar__background {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgb(252, 252, 252);
+    border-width: 1px;
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.custom-progress-bar .unity-progress-bar__progress {
+    background-color: rgb(0, 220, 255);
+    margin: 2px; 
+    border-radius: 6px; 
+    transition-property: width, background-color;
+    transition-duration: 0.2s; 
+}
+
+.custom-progress-bar .unity-label {
+    display: none;
+}

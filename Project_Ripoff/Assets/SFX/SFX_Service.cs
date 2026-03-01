@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 /**
- * Die Klasse bietet eine Funktionalität als SFX Service.
- * Dabei können andere Klassen Soundeffekte ausführen ohne gekoppelt zu sein 
+ * Die Klasse bietet eine Funktionalitaet als SFX Service.
+ * Dabei koennen andere Klassen Soundeffekte ausführen ohne gekoppelt zu sein 
  * bzw. sich gegeseitig zu kennen.
  * Dokumentation/Guideline zur Implementierung ist unter 
  * "https://projekte.tgm.ac.at/youtrack/articles/RIP-A-9/Observer-Pattern-Guideline-Ripoff-Disposable-Heroes" zu finden.

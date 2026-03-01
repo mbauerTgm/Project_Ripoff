@@ -6,7 +6,7 @@ using UnityEngine.AI;
 /**
  * Diese Klasse stellt Funktionalität zur verwendung des Player Characters bereit.
  * @author Maximilian Bauer
- * @version 0.3
+ * @version 0.5
  */
 public class Player_Character : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class Player_Character : MonoBehaviour
     private bool agentMoving;
     private bool showQueue = false;
     private LineRenderer lineRenderer;
+    private bool shootingModeEnabled = false;
+    private Camera mainCamera;
 
     private void Awake()
     {
@@ -25,17 +27,21 @@ public class Player_Character : MonoBehaviour
     private void OnEnable()
     {
         messaging_Service.playerMoveEvent += MovePlayer;
+        messaging_Service.stopAtCurrentPositionEvent += StopAtCurrentPosition;
         messaging_Service.playerMoveShiftEvent += AddMovePointToQueue;
         messaging_Service.showPlayerQueue += SetShowQueue;
         messaging_Service.getPlayerPosition += GetPlayerPosition;
+        messaging_Service.toggleShootingMode += ToggleShootingMode;
     }
 
     private void OnDisable()
     {
         messaging_Service.playerMoveEvent -= MovePlayer;
+        messaging_Service.stopAtCurrentPositionEvent -= StopAtCurrentPosition;
         messaging_Service.playerMoveShiftEvent -= AddMovePointToQueue;
         messaging_Service.showPlayerQueue -= SetShowQueue;
         messaging_Service.getPlayerPosition -= GetPlayerPosition;
+        messaging_Service.toggleShootingMode -= ToggleShootingMode;
     }
 
     // Start is called before the first frame update
@@ -54,6 +60,8 @@ public class Player_Character : MonoBehaviour
         lineRenderer.endWidth = 0.05f;
         lineRenderer.positionCount = 0;
         lineRenderer.enabled = false;
+
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -85,6 +93,31 @@ public class Player_Character : MonoBehaviour
         {
             lineRenderer.enabled = false;
         }
+
+        //Shooting Mode
+        if (shootingModeEnabled)
+        {
+            RotatePlayerToMousePosition();
+        }
+    }
+
+    /**
+     * Dreht den Spieler in die Richtung der Mausposition
+     */
+    private void RotatePlayerToMousePosition()
+    {
+        // Ray von der Kamera zur Mausposition
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000f))
+        {
+            Vector3 targetPosition = hitInfo.point;
+
+            targetPosition.y = transform.position.y;
+
+            transform.LookAt(targetPosition);
+        }
+
     }
 
     /**
@@ -95,6 +128,13 @@ public class Player_Character : MonoBehaviour
         movePointsQueue?.Clear();
         agent?.SetDestination(movePos);
         agentMoving = true;
+    }
+
+    private void StopAtCurrentPosition()
+    {
+        movePointsQueue?.Clear();
+        agent?.SetDestination(transform.position);
+        agentMoving = false;
     }
 
     private void MovePlayerToNextQueuePoint()
@@ -171,6 +211,12 @@ public class Player_Character : MonoBehaviour
 
     }
 
-    public Vector3 GetPlayerPosition() {  return transform.position; }
+    public Vector3 GetPlayerPosition() { return transform.position; }
+
+    private void ToggleShootingMode()
+    {
+        shootingModeEnabled = !shootingModeEnabled;
+        if(shootingModeEnabled) { StopAtCurrentPosition(); }
+    }
 
 }

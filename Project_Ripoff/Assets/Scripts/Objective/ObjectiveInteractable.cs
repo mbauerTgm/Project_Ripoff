@@ -47,8 +47,8 @@ public class ObjectiveInteractable : MonoBehaviour
 
             //Progress
             float progress = Mathf.Clamp01(currentTimer / interactionTime);
-            //UI Update
-            //...
+            messaging_Service.updateInteractionBar?.Invoke(transform.position, progress);
+            messaging_Service.updateProgress?.Invoke(progress);
             Debug.Log(progress);
 
             // Check ob fertig
@@ -64,7 +64,9 @@ public class ObjectiveInteractable : MonoBehaviour
         if (this != meantObjective) return;
 
         if (isCompleted) return;
+
         interactionActive = true;
+        messaging_Service.showInteractionHint?.Invoke(transform.position);
     }
 
     //Wird aufgerufen, wenn der Spieler loslässt oder wegschaut
@@ -75,15 +77,16 @@ public class ObjectiveInteractable : MonoBehaviour
         interactionActive = false;
 
         currentTimer = 0f;
-        // UI zurücksetzen
-        //...
+        messaging_Service.hideInteractionHint?.Invoke(transform.position);
+        messaging_Service.updateInteractionBar?.Invoke(transform.position, 0f);
+        messaging_Service.updateProgress?.Invoke(0f);
     }
 
     private void CompleteObjective()
     {
         isCompleted = true;
         Debug.Log("Objective Completed!");
-        //...
+        messaging_Service.objectiveComplete?.Invoke();
     }
 
     private void InteractObjectiveButtonDepress() { interactionButtonPressed = true; }

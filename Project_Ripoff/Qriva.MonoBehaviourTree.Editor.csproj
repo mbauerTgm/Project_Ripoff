@@ -63,14 +63,14 @@
   <ItemGroup>
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\BehaviourTreeWindow.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\SetNumberEditor.cs" />
-    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\BlackboardEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\IsSetConditionEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\MonoBehaviourTreeEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\SetVectorEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\VariableReferenceDrawer.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\NumberConditionEditor.cs" />
-    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\InvokeUnityEventEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\SetObjectEditor.cs" />
+    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\BlackboardEditor.cs" />
+    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\InvokeUnityEventEditor.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Editor\NodeDropdown.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -567,7 +567,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@0920df93f957\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
@@ -591,19 +595,31 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@0920df93f957\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@ab839cc7d2ad\Lib\Editor\unityplastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.IO.Hashing">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@0920df93f957\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@0920df93f957\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d78732e851eb\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">

@@ -16,6 +16,7 @@ public class TeammateEventListener : MonoBehaviour
     public FormationManager formationManager;
     private Transform formationTargetHelper;
     private GameObject movetargetObject;
+    private Laser_Shooter laserShooter;
 
 
 
@@ -64,7 +65,8 @@ public class TeammateEventListener : MonoBehaviour
 
     private void Awake()
     {
-        messaging = FindObjectOfType<Messaging_Service>();
+        messaging = FindFirstObjectByType<Messaging_Service>();
+        laserShooter = FindFirstObjectByType<Laser_Shooter>();
     }
 
 
@@ -72,7 +74,7 @@ public class TeammateEventListener : MonoBehaviour
     {
         if (messaging == null)
         {
-            messaging = FindObjectOfType<Messaging_Service>();
+            messaging = FindFirstObjectByType<Messaging_Service>();
         }
 
         if (messaging != null)
@@ -83,7 +85,12 @@ public class TeammateEventListener : MonoBehaviour
 
             messaging.wedgeFormationEvent += OnWedgeFormation;
             messaging.lineFormationEvent += OnLineFormation;
+            messaging.veeFormationEvent += OnVeeFormation;
+            messaging.fileFormationEvent += OnFileFormation;
+            messaging.echelonFormationEvent += OnEchelonFormation;
             messaging.noneFormationEvent += OnNoneFormation;
+
+            messaging.fireLaserShotTeammate += OnShootReceived;
         }
     }
 
@@ -99,7 +106,12 @@ public class TeammateEventListener : MonoBehaviour
 
             messaging.wedgeFormationEvent -= OnWedgeFormation;
             messaging.lineFormationEvent -= OnLineFormation;
+            messaging.veeFormationEvent -= OnVeeFormation;
+            messaging.fileFormationEvent -= OnFileFormation;
+            messaging.echelonFormationEvent -= OnEchelonFormation;
             messaging.noneFormationEvent -= OnNoneFormation;
+
+            messaging.fireLaserShotTeammate -= OnShootReceived;
         }
 
         if (movetargetObject != null)
@@ -135,8 +147,7 @@ public class TeammateEventListener : MonoBehaviour
     }
 
     private void OnMoveTeammatesToPosition(Vector3 movePosition)
-    {
-        
+    { 
         var varRef = blackboard.GetVariable<TeammateBehaviorModeVariable>("BehaviorMode");
         var targetVar = blackboard.GetVariable<TransformVariable>("TargetPosition");
 
@@ -161,9 +172,42 @@ public class TeammateEventListener : MonoBehaviour
     {
         blackboard.GetVariable<TeammateFormationModeVariable>("FormationMode").Value = TeammateFormationMode.Line;
     }
+    private void OnVeeFormation()
+    {
+        blackboard.GetVariable<TeammateFormationModeVariable>("FormationMode").Value = TeammateFormationMode.Vee;
+    }
+    private void OnFileFormation()
+    {
+        blackboard.GetVariable<TeammateFormationModeVariable>("FormationMode").Value = TeammateFormationMode.File;
+    }
+    private void OnEchelonFormation()
+    {
+        blackboard.GetVariable<TeammateFormationModeVariable>("FormationMode").Value = TeammateFormationMode.Echelon;
+    }
 
     private void OnNoneFormation()
     {
         blackboard.GetVariable<TeammateFormationModeVariable>("FormationMode").Value = TeammateFormationMode.None;
+    }
+
+    private void OnShootReceived()
+    {
+        var targetVar = blackboard.GetVariable<TransformVariable>("LaserTarget");
+
+        if (targetVar != null && targetVar.Value != null)
+        {
+            Vector3 direction = targetVar.Value.position - transform.position;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }
+        }
+
+        if (laserShooter != null)
+        {
+            laserShooter.SendMessage("Shoot");
+        }
     }
 }

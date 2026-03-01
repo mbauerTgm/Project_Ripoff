@@ -35,10 +35,10 @@ public class Laser_Shooter : MonoBehaviour
                 messaging_Service.fireLaserShotPlayer += Shoot;
                 break;
             case Shooter_Type.Teammate:
-                Debug.Log("Shooter Type TEAMMATE not implemented");
+                messaging_Service.fireLaserShotTeammate += Shoot;
                 break;
             case Shooter_Type.Enemy:
-                Debug.Log("Shooter Type ENEMY not implemented");
+                messaging_Service.fireLaserShotEnemy += Shoot;
                 break;
         }
         
@@ -47,6 +47,8 @@ public class Laser_Shooter : MonoBehaviour
     private void OnDisable()
     {
         messaging_Service.fireLaserShotPlayer -= Shoot;
+        messaging_Service.fireLaserShotTeammate -= Shoot;
+        messaging_Service.fireLaserShotEnemy -= Shoot;
     }
 
     void Shoot()

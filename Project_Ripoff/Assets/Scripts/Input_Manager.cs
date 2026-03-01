@@ -5,25 +5,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-/**
- * Die Klasse regelt alle Eingaben des Spielers 
- * und weist alle anderen Services mittels auslösen von Events
- * zu auf Eingaben folgende Aktionen an.
- * @author Maximilian Bauer
- * @version 1.0.5
- */
+/// <summary>
+/// Die Klasse regelt alle Eingaben des Spielers 
+/// und weist alle anderen Services mittels auslösen von Events 
+/// zu auf Eingaben folgende Aktionen an.
+/// <br></br>
+/// <br></br>
+/// <b>Author: Maximilian Bauer</b>
+/// <br></br>
+/// <b>Version 1.1.0</b>
+/// </summary>
 public class Input_Manager : MonoBehaviour
 {
     private Messaging_Service messaging_Service;
 
     private Camera mainCamera;
-    private VisualElement root;
-    private VisualElement rootOpen;
-    private bool wasdWasPressed = false;
-    private bool isMiddleMouseHeld = false;
     private bool selectTeamMovePosition = false;
     private bool wasSelectTeamMovePosition = false;
-    
+    private bool isGamePaused = false;
+    private bool shootingModeEnabled = false;
+
+
     private LayerMask floorLayer;
 
     [Header("Combat Settings")]
@@ -34,11 +36,7 @@ public class Input_Manager : MonoBehaviour
     [SerializeField] private LayerMask objectiveInteractionLayer;
     private ObjectiveInteractable currentHoveredObjective;
     private Collider lastHitCollider;
-    private bool interactionButtonPressed = false;
-
-    [Header("UI")]
-    [SerializeField] private bool sceneWithUI = true;
-    public GameObject openCommandMenuUI;
+    private bool progressWasJustReset = false;
 
     private void Awake()
     {
@@ -48,33 +46,16 @@ public class Input_Manager : MonoBehaviour
 
     private void OnEnable()
     {
-        if(sceneWithUI)
-        {
+        messaging_Service.handleCommanderActionFromUI += HandleCommanderAction;
+        messaging_Service.togglePauseMenu += ToggleGamePause;
+        messaging_Service.toggleShootingMode += ToggleShootingMode;
+    }
 
-            var uiDocument = GetComponent<UIDocument>();
-            root = uiDocument.rootVisualElement;
-            var uiOpenCommandMenuDocument = openCommandMenuUI.GetComponent<UIDocument>();
-            rootOpen = uiOpenCommandMenuDocument.rootVisualElement;
-            var openCommandMenuButton = rootOpen.Q<VisualElement>("button_opencommandmenu");
-            var commandMenu = root.Q<VisualElement>("command-menu");
-            commandMenu.style.position = Position.Absolute;
-            //commandMenu.style.display = DisplayStyle.None;
-            var moveToPanel = root.Q<VisualElement>("panel_moveto");
-            var followLeaderPanel = root.Q<VisualElement>("panel_followleader");
-            var suppressPositionPanel = root.Q<VisualElement>("panel_suppressposition");
-            var stackUpPanel = root.Q<VisualElement>("panel_stackup");
-            var enterAndClearPanel = root.Q<VisualElement>("panel_enterandclear");
-            var holdPositionPanel = root.Q<VisualElement>("panel_holdposition");
-
-            openCommandMenuButton.RegisterCallback<ClickEvent>(ev => messaging_Service.openCommanderMenu?.Invoke());
-            moveToPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("teammateMoveEvent"));
-            followLeaderPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("followPlayerEvent"));
-            suppressPositionPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("TODO"));
-            stackUpPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("TODO"));
-            enterAndClearPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("TODO"));
-            holdPositionPanel.RegisterCallback<ClickEvent>(ev => HandleCommanderAction("holdPositionEvent"));
-
-        }
+    private void OnDisable()
+    {
+        messaging_Service.handleCommanderActionFromUI -= HandleCommanderAction;
+        messaging_Service.togglePauseMenu -= ToggleGamePause;
+        messaging_Service.toggleShootingMode -= ToggleShootingMode;
     }
 
     // Start is called before the first frame update
@@ -86,20 +67,38 @@ public class Input_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Pause Menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            messaging_Service.togglePauseMenu?.Invoke();
+        }
+
+        if (isGamePaused) return;
 
         //----------------------
         //player movement
-        if(!selectTeamMovePosition)
-        {   
+        if (!selectTeamMovePosition && !shootingModeEnabled)
+        {
             //queued move
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1)) 
-            { 
-                messaging_Service.playerMoveShiftEvent?.Invoke(EvaluateMousePosition()); 
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1))
+            {
+                Vector3 mousePos = EvaluateMousePosition();
+                if(mousePos != Vector3.zero)
+                {
+                    messaging_Service.playerMoveShiftEvent?.Invoke(mousePos);
+                }
             }
             //normal move
-            else if (Input.GetMouseButtonDown(1)) { messaging_Service.playerMoveEvent?.Invoke(EvaluateMousePosition()); }
+            else if (Input.GetMouseButtonDown(1)) 
+            {
+                Vector3 mousePos = EvaluateMousePosition();
+                if (mousePos != Vector3.zero)
+                {
+                    messaging_Service.playerMoveEvent?.Invoke(mousePos);
+                }   
+            }
             //visualize queue
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 messaging_Service.showPlayerQueue?.Invoke(true);
             }
@@ -107,24 +106,34 @@ public class Input_Manager : MonoBehaviour
             {
                 messaging_Service.showPlayerQueue?.Invoke(false);
             }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                messaging_Service.stopAtCurrentPositionEvent?.Invoke();
+            }
         }
 
         //----------------------
-        //player interaction
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) {
-            nextFireTime = Time.time + playerFireRate;
+        //player shooting
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            messaging_Service.toggleShootingMode?.Invoke();
+        }
+        if (shootingModeEnabled)
+        {
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + playerFireRate;
 
-            messaging_Service.fireLaserShotPlayer?.Invoke(); 
+                messaging_Service.fireLaserShotPlayer?.Invoke();
+            }
         }
 
         //----------------------
         // Objective Interaction
         if (Input.GetKeyDown(KeyCode.F)) { 
-            interactionButtonPressed = true; 
             messaging_Service.interactObjectiveButtonDepress?.Invoke();
         }
         if (Input.GetKeyUp(KeyCode.F)) { 
-            interactionButtonPressed = false; 
             messaging_Service.interactObjectiveButtonRelease?.Invoke();
         }
         HandleInteractionLogic();
@@ -146,8 +155,8 @@ public class Input_Manager : MonoBehaviour
         }
 
         // Freie Kamerabewegung mit gedrücktem Mausrad
-        if (Input.GetMouseButtonDown(2)) { messaging_Service.rotateCameraWithMouse?.Invoke(true); }
-        if (Input.GetMouseButtonUp(2)) { messaging_Service.rotateCameraWithMouse?.Invoke(false); }
+        if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Tab)) { messaging_Service.rotateCameraWithMouse?.Invoke(true); }
+        if (Input.GetMouseButtonUp(2) || Input.GetKeyUp(KeyCode.Tab)) { messaging_Service.rotateCameraWithMouse?.Invoke(false); }
 
         // Kamera Zoom mit Mausrad
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -176,15 +185,10 @@ public class Input_Manager : MonoBehaviour
 
         //----------------------
         //UI
-
-        if (Input.GetKeyDown(KeyCode.F))
+        //Commander Menu
+        if (Input.GetKeyDown(KeyCode.E))
         {
             messaging_Service.openCommanderMenu?.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            messaging_Service.togglePauseMenu?.Invoke();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -229,8 +233,8 @@ public class Input_Manager : MonoBehaviour
             return hitInfo.point;
         } else
         {
-            Debug.LogError("Failed to find Mouse Position");
-            return gameObject.transform.position;
+            //Debug.LogError("Failed to find Mouse Position");
+            return Vector3.zero;
         }
         
     }
@@ -255,18 +259,27 @@ public class Input_Manager : MonoBehaviour
                 float distance = Vector3.Distance(currentHoveredObjective.transform.position, currentPlayerPosition);
                 if (distance > currentHoveredObjective.requiredDistance)
                 {
-                    messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective); // Zu weit weg -> Abbruch
+                    if (!progressWasJustReset)
+                    {
+                        messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective); // Zu weit weg -> Abbruch
+                        progressWasJustReset = true;
+                    }
                     return;
                 }
                 messaging_Service.processInteractionEvent?.Invoke(currentHoveredObjective);
             }
+            progressWasJustReset = false;
         }
         else
         {
             //Nothing hit
             if (currentHoveredObjective != null)
             {
-                messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective);
+                if (!progressWasJustReset)
+                {
+                    messaging_Service.resetProgressEvent?.Invoke(currentHoveredObjective); // Zu weit weg -> Abbruch
+                    progressWasJustReset = true;
+                }
                 currentHoveredObjective = null;
             }
             lastHitCollider = null;
@@ -282,9 +295,20 @@ public class Input_Manager : MonoBehaviour
         else if (action == "followPlayerEvent")
         {
             messaging_Service.followPlayerEvent?.Invoke();
-        } else if (action == "holdPositionEvent")
+        } 
+        else if (action == "holdPositionEvent")
         {
             messaging_Service.holdPositionEvent?.Invoke();
         }
+    }
+
+    private void ToggleGamePause()
+    {
+        isGamePaused = !isGamePaused;
+    }
+
+    private void ToggleShootingMode()
+    {
+        shootingModeEnabled = !shootingModeEnabled;
     }
 }

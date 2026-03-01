@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Prototyp.unity
     guid: 7bb6538d4fad7fd4bb010b3469904e6e
+  - enabled: 1
+    path: Assets/Scenes/Level_1-Tutorial.unity
+    guid: b6807e36d67585f40a61cc4932a92059
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

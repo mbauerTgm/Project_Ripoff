@@ -18,16 +18,28 @@ public class FormationManager : MonoBehaviour
         switch (mode)
         {
             case TeammateFormationMode.Wedge:
-                Debug.Log("FormationManager here ! | Wedge");
+                //Debug.Log("FormationManager here ! | Wedge");
                 return leaderPos - (leaderForward * rank * spacing) + (leaderRight * side * rank * spacing);
 
             case TeammateFormationMode.Line:
-                Debug.Log("FormationManager here ! | Line");
+                //Debug.Log("FormationManager here ! | Line");
                 float backOffset = spacing;
                 return leaderPos - (leaderForward * backOffset) + (leaderRight * side * rank * spacing);
 
+            case TeammateFormationMode.Vee:
+                //Debug.Log("FormationManager here ! | Vee");
+                return leaderPos + (leaderForward * rank * spacing) + (leaderRight * side * rank * spacing);
+
+            case TeammateFormationMode.File:
+                //Debug.Log("FormationManager here ! | File");
+                return leaderPos - (leaderForward * (memberIndex + 1) * spacing);
+
+            case TeammateFormationMode.Echelon:
+                //Debug.Log("FormationManager here ! | Echelon");
+                return leaderPos - (leaderForward * (memberIndex + 1) * spacing) + (leaderRight * (memberIndex + 1) * spacing);
+
             default:
-                Debug.Log("FormationManager here ! | default");
+                //Debug.Log("FormationManager here ! | default");
                 return leaderPos - (leaderForward * spacing);
         }
     }
@@ -44,7 +56,19 @@ public class FormationManager : MonoBehaviour
 
             Gizmos.color = Color.yellow;
             Vector3 posLine = GetFormationPosition(i, TeammateFormationMode.Line);
-            Gizmos.DrawWireSphere(posLine, 0.3f);
+            Gizmos.DrawSphere(posLine + new Vector3(0,0.5f,0), 0.3f);
+
+            Gizmos.color = Color.magenta;
+            Vector3 posVee = GetFormationPosition(i, TeammateFormationMode.Vee);
+            Gizmos.DrawSphere(posVee + new Vector3(0, 1f, 0), 0.3f);
+
+            Gizmos.color = Color.white;
+            Vector3 posFile = GetFormationPosition(i, TeammateFormationMode.File);
+            Gizmos.DrawSphere(posFile + new Vector3(0, 1.5f, 0), 0.3f);
+
+            Gizmos.color = Color.green;
+            Vector3 posEchelon = GetFormationPosition(i, TeammateFormationMode.Echelon);
+            Gizmos.DrawSphere(posEchelon + new Vector3(0, 2f, 0), 0.3f);
         }
     }
 }

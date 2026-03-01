@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/objective.uss?fileID=7433441132597879392&amp;guid=05d4cee1b9f2a674bb5eb92ec84c9617&amp;type=3#objective" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex;">
+        <ui:ProgressBar value="0" high-value="1" name="progressBar" class="custom-progress-bar" style="width: 581px; position: absolute; top: 170px; left: 48px;" />
+        <ui:Label text="Capture&#10;" style="color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/Exo2-SemiBold.ttf?fileID=12800000&amp;guid=adf8d1c7a473af84cadebbd0632fbb53&amp;type=3#Exo2-SemiBold&quot;); font-size: 90px; height: 98px; -unity-text-align: upper-center; width: 602px; position: absolute; top: 40px; left: -38px; flex-wrap: wrap;">
+            <ui:Label text="F" name="Label" style="color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/Exo2-SemiBold.ttf?fileID=12800000&amp;guid=adf8d1c7a473af84cadebbd0632fbb53&amp;type=3#Exo2-SemiBold&quot;); -unity-text-align: upper-center; font-size: 90px; position: absolute; top: -4px; left: 496px; align-items: center; right: auto; -unity-text-outline-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 14px; border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-bottom-left-radius: 14px; padding-left: 30px; padding-right: 30px;" />
+        </ui:Label>
+    </ui:VisualElement>
+</ui:UXML>

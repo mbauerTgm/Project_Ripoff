@@ -61,56 +61,76 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\UI\PauseController.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\MoveNavmeshAgentSmart.cs" />
     <Compile Include="Assets\SFX\SFX_Service.cs" />
-    <Compile Include="Assets\Scripts\Messaging_Service.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\MoveNavmeshAgent.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Variables\TeammateBehaviorModeVariable.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\BotSpawner.cs" />
     <Compile Include="Assets\Scripts\FOV_FOW\FieldOfView.cs" />
+    <Compile Include="Assets\Scripts\UI\ObjectiveFaceCamera.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\MoveTowards.cs" />
-    <Compile Include="Assets\Scripts\Input_Manager.cs" />
-    <Compile Include="Assets\Scripts\Save_Load\GameData.cs" />
-    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\CommandService.cs" />
-    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\SetRandomPosition.cs" />
     <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\CheckTeammateBehaviorMode.cs" />
     <Compile Include="Assets\UI\CommandoMenuController.cs" />
-    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\TeammateEventListener.cs" />
-    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\SetPatrolPoint.cs" />
-    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Variables\TeammateFormationTypeVariable.cs" />
-    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\DetectEnemyService.cs" />
+    <Compile Include="Assets\UI\ObjectiveController.cs" />
     <Compile Include="Assets\Scripts\Long_Distance_Interaction\LaserCollisionHandler.cs" />
-    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\CheckTeammateFormationMode.cs" />
-    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Formationmanager.cs" />
-    <Compile Include="Assets\Scripts\Objective\ObjectiveInteractable.cs" />
-    <Compile Include="Assets\Scripts\Player_Character\Player_Character.cs" />
     <Compile Include="Assets\Scripts\Long_Distance_Interaction\Laser_Shooter.cs" />
     <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Scripts\PlayerNavmeshController.cs" />
     <Compile Include="Assets\UI\MainMenuController.cs" />
+    <Compile Include="Assets\VFX\VFX_Service.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Messaging_Service.cs" />
+    <Compile Include="Assets\Scripts\Input_Manager.cs" />
+    <Compile Include="Assets\Scripts\Save_Load\GameData.cs" />
+    <Compile Include="Assets\Test_Gamelogik\V2_FOV\V2FieldOfView.cs" />
+    <Compile Include="Assets\UI\EnableShootingModeController.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\Enemy.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\CommandService.cs" />
+    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\SetRandomPosition.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\IsShootingTargetSetCondition.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\TeammateEventListener.cs" />
+    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\SetPatrolPoint.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\V3_FOV\EnemyVisibility.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Variables\TeammateFormationTypeVariable.cs" />
+    <Compile Include="Assets\AI\MonoBehaviourTree\Source\Samples\Demo URP\Example Assets\Nodes\DetectEnemyService.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\CheckTeammateFormationMode.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Teammate\FireLaserEventAction.cs" />
+    <Compile Include="Assets\AI\Test_AI\AI_Test_Scene\Formationmanager.cs" />
+    <Compile Include="Assets\Scripts\Objective\ObjectiveInteractable.cs" />
+    <Compile Include="Assets\Scripts\Player_Character\Player_Character.cs" />
     <Compile Include="Assets\Scripts\Save_Load\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Prefabs\--PLACEHOLDER--.txt" />
     <None Include="Assets\SFX\--PLACEHOLDER--.txt" />
+    <None Include="Assets\Test_Gamelogik\V2_FOV\VisionMask.shader" />
     <None Include="Assets\UI\menu-locationmoveto.uxml" />
+    <None Include="Assets\UI\enableshootingmode.uxml" />
+    <None Include="Assets\UI\pause.uxml" />
     <None Include="Assets\UI\hud.uss" />
     <None Include="Assets\Test_Gamelogik\kenney_prototypeTextures\License.txt" />
     <None Include="Assets\UI\hud.uxml" />
     <None Include="Assets\UI\open-commandmenu.uss" />
+    <None Include="Assets\UI\pause.uss" />
     <None Include="Assets\Materials\FOV_FOW\Painter Render Texture surface shader.shader" />
+    <None Include="Assets\UI\objective.uss" />
     <None Include="Assets\UI\--PLACEHOLDER--.txt" />
     <None Include="Assets\UI\command-menu.uxml" />
     <None Include="Assets\Scenes\--PLACEHOLDER--.txt" />
+    <None Include="Assets\UI\objective.uxml" />
     <None Include="Assets\UI\main-menu.uss" />
+    <None Include="Assets\Test_Gamelogik\V2_FOV\FogOfWar.shader" />
     <None Include="Assets\Models\--PLACEHOLDER--.txt" />
     <None Include="Assets\UI\main-menu.uxml" />
     <None Include="Assets\Scripts\--PLACEHOLDER--.txt" />
     <None Include="Assets\VFX\--PLACEHOLDER--.txt" />
     <None Include="Assets\Materials\--PLACEHOLDER--.txt" />
     <None Include="Assets\AI\--PLACEHOLDER--.txt" />
+    <None Include="Assets\UI\enableshootingmode.uss" />
     <None Include="Assets\UI\open-commandmenu.uxml" />
     <None Include="Assets\UI\command-menu.uss" />
+    <None Include="Assets\Test_Gamelogik\V2_FOV\HiddenEnemy.shader" />
     <None Include="Assets\Animations\--PLACEHOLDER--.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -582,6 +602,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
@@ -590,8 +614,20 @@
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@205a02cbcb39\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.IO.Hashing">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@0920df93f957\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d78732e851eb\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1090,8 +1126,24 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.AI.Navigation">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
@@ -1108,6 +1160,10 @@
     </Reference>
     <Reference Include="Unity.AI.Navigation.Updater">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
@@ -1134,12 +1190,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
@@ -1150,16 +1210,24 @@
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
@@ -1170,8 +1238,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.Settings.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Splines">
@@ -1194,6 +1266,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Cinemachine">
       <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
       <Private>False</Private>
@@ -1202,16 +1278,44 @@
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

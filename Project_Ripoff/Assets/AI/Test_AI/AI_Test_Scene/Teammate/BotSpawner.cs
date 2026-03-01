@@ -21,6 +21,7 @@ public class BotSpawner : MonoBehaviour
     public float spawn_height;
 
     public int spawnRadius = 10;
+    public Transform spawnpoint;
 
     private List<GameObject> teammates = new List<GameObject>();
 
@@ -28,7 +29,7 @@ public class BotSpawner : MonoBehaviour
     {
         for (int i = 0; i < Teammate_count; i++)
         {
-            SpawnBot(i + 1);
+            SpawnBot(i);
         }
     }
 
@@ -37,12 +38,13 @@ public class BotSpawner : MonoBehaviour
     {
         Vector3 spawnPos = GetRandomNavMeshPosition();
         GameObject teammate = Instantiate(TeammatePrefab, spawnPos, Quaternion.identity);
+        teammate.SetActive(true);
         TeammateEventListener listener = teammate.GetComponent<TeammateEventListener>();
-        var bb = teammate.GetComponent<Blackboard>();
 
         if (listener != null)
         {
             listener.setIndex(i);
+            listener.formationManager = FindFirstObjectByType<FormationManager>();
         }
         }
 
@@ -50,7 +52,7 @@ public class BotSpawner : MonoBehaviour
     {
         int x = UnityEngine.Random.Range( - spawnRadius,spawnRadius);
         int z = UnityEngine.Random.Range(-spawnRadius, spawnRadius);
-        return new Vector3(x, spawn_height , z);
+        return spawnpoint.position + new Vector3(x, spawn_height , z);
     }
     void Update()
     {

@@ -142,7 +142,7 @@ public class MainMenuController : MonoBehaviour
     private void InitializeDropdowns()
     {
         languageDropdown.choices = new List<string> { "English", "Deutsch" };
-        displayModeDropdown.choices = new List<string> { "Fullscreen", "Windowed" };
+        displayModeDropdown.choices = new List<string> { "Windowed Fullscreen", "Windowed" };
         qualityDropdown.choices = new List<string>(QualitySettings.names);
 
         availableResolutions = Screen.resolutions.Select(r => new Resolution { width = r.width, height = r.height }).Distinct().ToArray();
@@ -255,7 +255,7 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.SetFloat("SfxVol", cachedSfxVol);
 
         PlayerPrefs.Save();
-        FullScreenMode mode = (cachedDisplayModeIndex == 0) ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+        FullScreenMode mode = (cachedDisplayModeIndex == 0) ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
 
         if (cachedResolutionIndex >= 0 && cachedResolutionIndex < availableResolutions.Length)
         {
@@ -297,7 +297,7 @@ public class MainMenuController : MonoBehaviour
     /**
      * Holt die Daten aus dem Cache und updatet die UI vom Cache, wenn die Einstellungen geöffnet werden.
      */ 
-    private void OnSettingsClicked()
+    public void OnSettingsClicked()
     {
         LoadSystemSettingsToCache();
         UpdateUIFromCache();
@@ -325,7 +325,7 @@ public class MainMenuController : MonoBehaviour
      */ 
     private void OnLevel1Clicked()
     {
-        SceneManager.LoadScene("Prototyp");
+        SceneManager.LoadScene("Level_1-Tutorial");
     }
     /**
      * Hier wird das Messaging Service implementiert, was geplant wird wenn das Spiel weiter ist, um die Einstellungen öffnen zu können

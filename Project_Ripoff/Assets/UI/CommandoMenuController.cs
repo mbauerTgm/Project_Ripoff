@@ -30,6 +30,22 @@ public class CommanderMenuController : MonoBehaviour
         infolabelMoveTeammatePosition = rootInfo.Q<VisualElement>("label-chooselocation");
         infolabelMoveTeammatePosition.style.display = DisplayStyle.None;
         commanderMenu = root.Q<VisualElement>("command-menu");
+        var commandMenu = root.Q<VisualElement>("command-menu");
+        commandMenu.style.position = Position.Absolute;
+        //commandMenu.style.display = DisplayStyle.None;
+        var moveToPanel = root.Q<VisualElement>("panel_moveto");
+        var followLeaderPanel = root.Q<VisualElement>("panel_followleader");
+        var suppressPositionPanel = root.Q<VisualElement>("panel_suppressposition");
+        var stackUpPanel = root.Q<VisualElement>("panel_stackup");
+        var enterAndClearPanel = root.Q<VisualElement>("panel_enterandclear");
+        var holdPositionPanel = root.Q<VisualElement>("panel_holdposition");
+
+        moveToPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("teammateMoveEvent"));
+        followLeaderPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("followPlayerEvent"));
+        suppressPositionPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("TODO"));
+        stackUpPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("TODO"));
+        enterAndClearPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("TODO"));
+        holdPositionPanel.RegisterCallback<ClickEvent>(ev => messaging_Service.handleCommanderActionFromUI?.Invoke("holdPositionEvent"));
         if (commanderMenu != null)
         {
             commanderMenu.style.display = DisplayStyle.None;

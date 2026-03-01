@@ -11,7 +11,10 @@ public enum TeammateBehaviorMode
 {
     Idle,
     FollowPlayer,
-    MoveToPosition
+    MoveToPosition,
+    StackUp,
+    EnterAndClear,
+    SupressPosition
 }
 
 /**
